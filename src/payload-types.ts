@@ -67,6 +67,7 @@ export interface Config {
   };
   blocks: {};
   collections: {
+    words: Word;
     users: User;
     media: Media;
     'payload-kv': PayloadKv;
@@ -76,6 +77,7 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
+    words: WordsSelect<false> | WordsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -114,6 +116,18 @@ export interface UserAuthOperations {
     email: string;
     password: string;
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "words".
+ */
+export interface Word {
+  id: string;
+  word_uyghur: string;
+  word_english: string;
+  word_turkish?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -183,6 +197,10 @@ export interface PayloadLockedDocument {
   id: string;
   document?:
     | ({
+        relationTo: 'words';
+        value: string | Word;
+      } | null)
+    | ({
         relationTo: 'users';
         value: string | User;
       } | null)
@@ -231,6 +249,17 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "words_select".
+ */
+export interface WordsSelect<T extends boolean = true> {
+  word_uyghur?: T;
+  word_english?: T;
+  word_turkish?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
