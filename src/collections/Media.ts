@@ -18,6 +18,7 @@ export const Media: CollectionConfig = {
       'audio/mpeg',
       'audio/mp3',
       'audio/mp4',
+      'audio/m4a',
       'audio/aac',
       'audio/x-m4a',
       'audio/ogg',
